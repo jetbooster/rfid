@@ -1,4 +1,5 @@
 from pirc522 import RFID
+from time import sleep
 
 rdr = RFID()
 util = rdr.util()
@@ -16,4 +17,6 @@ while True:
       if not error:
         print("Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3]))
         util.set_tag(uid)
+        util.auth(rdr.auth_b, [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF])
         util.dump()
+        sleep(2)
