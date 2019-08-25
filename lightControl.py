@@ -1,31 +1,32 @@
 from pirc522 import RFID
 from time import sleep
 
-from lifxlan import LifxLAN
+from lifxControl import Lifx
 
-rdr = RFID()
-util = rdr.util()
+class RfidListener:
+  def __init__(self, debug=False):
+    self.lifx = Lifx(1)
+    self.rdr = RFID()
+    self.util = self.rdr.util()
+    self.util.debug = debug
+    self.DEFAULT_KEY = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
+    with open('./.keys') as fyl:
+      self.keyA = tuple([x for x in bytearray(fyl.readline().strip().decode('hex'))])
+      self.keyB = tuple([x for x in bytearray(fyl.readline().strip().decode('hex'))])
+  def listen(self):
+    while True:
+      # Wait for tag
+        self.rdr.wait_for_tag()
 
-util.debug = True
+        # Request tag
+        (error, data) = self.rdr.request()
+        if not error:
+          (error, uid) = self.rdr.anticoll()
+          if not error:
+            print(uid)
+            if (uid == [43,107,171,33,202]):
+              self.lifx.toggle_power()
 
-DEFAULT_KEY = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
 
-with open('./.keys') as fyl:
-  keyA = tuple([x for x in bytearray(fyl.readline().strip().decode('hex'))])
-  keyB = tuple([x for x in bytearray(fyl.readline().strip().decode('hex'))])
-
-
-
-
-while True:
-  # Wait for tag
-    rdr.wait_for_tag()
-
-    # Request tag
-    (error, data) = rdr.request()
-    if not error:
-      (error, uid) = rdr.anticoll()
-      if not error:
-        print(uid)
-        if (uid == [43,107,171,33,202]):
-          
+if __name__ == "__main__":
+  RfidListener().listen()      

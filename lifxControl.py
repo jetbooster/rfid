@@ -10,6 +10,3 @@ class Lifx():
   def toggle_power(self):
       original_power_state = self.bulb.get_power()
       self.bulb.set_power("on" if original_power_state==0 else "off")
-
-lifx = Lifx(1)
-lifx.toggle_power()
