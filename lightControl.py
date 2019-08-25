@@ -4,7 +4,7 @@ from time import sleep
 rdr = RFID()
 util = rdr.util()
 
-util.debug = False
+util.debug = True
 
 while True:
   # Wait for tag
