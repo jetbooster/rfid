@@ -26,7 +26,7 @@ class RfidListener:
             print(uid)
             if (uid == [43,107,171,33,202]):
               self.lifx.toggle_power()
-            sleep(5)
+            sleep(2)
 
 
 if __name__ == "__main__":
