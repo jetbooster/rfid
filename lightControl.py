@@ -17,7 +17,7 @@ while True:
       if not error:
         print("Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3]))
         util.set_tag(uid)
-        util.auth(rdr.auth_a, [0x00, 0x00, 0x00, 0x00, 0x00, 0x00])
+        util.auth(rdr.auth_b, [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF])
         # for i in range(0,15):
         #   util.write_trailer(i)
         util.dump()
