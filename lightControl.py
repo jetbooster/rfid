@@ -20,6 +20,5 @@ while True:
         util.auth(rdr.auth_a, [0x00, 0x00, 0x00, 0x00, 0x00, 0x00])
         for i in range(0,15):
           util.write_trailer(i)
-        util.writeTrailer()
         util.dump()
         sleep(2)
