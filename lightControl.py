@@ -23,6 +23,6 @@ while True:
       if not error:
         print("Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3]))
         util.set_tag(uid)
-        util.auth(rdr.auth_b, list(keyB))
+        util.auth(rdr.auth_a, list(keyA))
         util.dump()
         sleep(2)
