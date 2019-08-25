@@ -9,8 +9,8 @@ util.debug = True
 DEFAULT_KEY = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
 
 with open('./.keys') as fyl:
-  keyA = [hex(x) for x in bytearray(fyl.readline().strip().decode('hex'))]
-  keyB = [hex(x) for x in bytearray(fyl.readline().strip().decode('hex'))]
+  keyA = tuple([hex(x) for x in bytearray(fyl.readline().strip().decode('hex'))])
+  keyB = tuple([hex(x) for x in bytearray(fyl.readline().strip().decode('hex'))])
 
 
 while True:
@@ -26,7 +26,7 @@ while True:
         util.set_tag(uid)
         util.auth(rdr.auth_b, DEFAULT_KEY)
         for i in range(1,15):
-          util.write_trailer(i, key_a=keyA, key_b=keyB)
+          util.write_trailer(i, key_a=keyA, key_b=keyB, user_data=0x69)
         util.dump()
         sleep(2)
 
