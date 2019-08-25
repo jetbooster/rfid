@@ -4,7 +4,7 @@ class Lifx():
   def __init__(self, num_lights):
     self.lifx=LifxLAN(1)
 
-    self.bulb = self.lifx.getLights()[0]
+    self.bulb = self.lifx.get_lights()[0]
 
     
   def toggle_power(self):
