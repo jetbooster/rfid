@@ -11,8 +11,10 @@ class RfidListener:
     self.util.debug = debug
     self.DEFAULT_KEY = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
     with open('./.keys') as fyl:
-      self.keyA = tuple([x for x in bytearray(fyl.readline().strip().decode('hex'))])
-      self.keyB = tuple([x for x in bytearray(fyl.readline().strip().decode('hex'))])
+      line1 = fyl.readline().strip()
+      line2 = fyl.readline().strip()
+      self.keyA = tuple([x for x in bytes.fromhex(line1)])
+      self.keyB = tuple([x for x in bytes.fromhex(line2)])
   def listen(self):
     while True:
       # Wait for tag
@@ -23,7 +25,7 @@ class RfidListener:
         if not error:
           (error, uid) = self.rdr.anticoll()
           if not error:
-            print uid
+            print(uid)
             if (uid == [43,107,171,33,202]):
               self.lifx.toggle_power()
             sleep(2)
