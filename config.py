@@ -9,8 +9,8 @@ util.debug = True
 DEFAULT_KEY = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
 
 with open('./.keys') as fyl:
-  keyA = tuple([hex(x) for x in bytearray(fyl.readline().strip().decode('hex'))])
-  keyB = tuple([hex(x) for x in bytearray(fyl.readline().strip().decode('hex'))])
+  keyA = tuple([x for x in bytearray(fyl.readline().strip().decode('hex'))])
+  keyB = tuple([x for x in bytearray(fyl.readline().strip().decode('hex'))])
 
 
 while True:
