@@ -23,7 +23,7 @@ class RfidListener:
         if not error:
           (error, uid) = self.rdr.anticoll()
           if not error:
-            print(uid)
+            print uid
             if (uid == [43,107,171,33,202]):
               self.lifx.toggle_power()
             sleep(2)
