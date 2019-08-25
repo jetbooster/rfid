@@ -1,8 +1,8 @@
 from lifxlan import LifxLAN
 
 class Lifx(LifxLAN):
-  def __init__(self,*args,**kwargs):
-    super().__init__(args, kwargs)
+  def __init__(self, num_lights):
+    super().__init__(num_lights)
 
     self.bulb = self.getLights()[0]
 
